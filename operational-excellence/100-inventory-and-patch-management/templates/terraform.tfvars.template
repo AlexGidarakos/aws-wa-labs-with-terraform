@@ -3,3 +3,8 @@ key_name_prefix    = "PROJECT_OWNER-PROJECT_NAME"
 public_key         = "KEYPAIR_FILENAME.pub"
 Application_prefix = "APPLICATION_PREFIX"
 # Section end: variables for keypairs.tf
+
+# Section start: variables for networks.tf
+vpc_main_cidr_block    = "10.0.0.0/16"
+subnet_main_cidr_block = "10.0.0.0/24"
+# Section end: variables for networks.tf

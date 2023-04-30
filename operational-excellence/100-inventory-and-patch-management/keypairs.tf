@@ -1,4 +1,4 @@
-resource "aws_key_pair" "kp" {
+resource "aws_key_pair" "main" {
   key_name   = "${var.key_name_prefix}-${terraform.workspace}-kp"
   public_key = file("./files/${var.public_key}")
 
