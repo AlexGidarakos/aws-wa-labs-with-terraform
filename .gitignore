@@ -40,6 +40,7 @@ plan
 *-gitignore*
 *.gitignore.*
 
-# AWS configuration and credentials files generated from templates
+# Files generated from templates
 aws.config
 aws.credentials
+providers.tf

@@ -26,7 +26,7 @@ function generate_aws_config_from_template {
     Log FATAL "Could not generate \"aws.config\" from template, aborting"
     exit $ERROR_AWS_CONFIG_GENERATION
   else
-    Log "\"aws.config\" created successfully from template"
+    Log "\"aws.config\" generated successfully from template"
   fi
 }
 
@@ -53,7 +53,24 @@ function generate_aws_credentials_from_template {
     Log FATAL "Could not generate \"aws.credentials\" from template, aborting"
     exit $ERROR_AWS_CREDENTIALS_GENERATION
   else
-    Log "\"aws.credentials\" created successfully from template"
+    Log "\"aws.credentials\" generated successfully from template"
+  fi
+}
+
+# Generate providers file from template
+function generate_providers_tf_from_template {
+  SED_FAILED="false"
+  Log "Processing \"providers.tf.template\""
+  sed \
+    -e "s/TF_VERSION/$TF_VERSION/g" \
+    -e "s/TF_AWS_VERSION/$TF_AWS_VERSION/g" \
+    ../templates/providers.tf.template > ../providers.tf || SED_FAILED="true"
+
+  if [[ "$SED_FAILED" == "true" ]]; then
+    Log FATAL "Could not generate \"providers.tf\" from template, aborting"
+    exit $ERROR_PROVIDERS_TF_GENERATION
+  else
+    Log "\"providers.tf\" generated successfully from template"
   fi
 }
 # Section end: function definitions
@@ -63,4 +80,6 @@ function generate_aws_credentials_from_template {
 generate_aws_config_from_template
 # Generate AWS credentials file from template
 generate_aws_credentials_from_template
+# Generate providers file from template
+generate_providers_tf_from_template
 # Section end: script main block
