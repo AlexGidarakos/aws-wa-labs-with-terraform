@@ -76,6 +76,29 @@ function generate_providers_tf_from_template {
     Log "\"providers.tf\" generated successfully from template"
   fi
 }
+
+# Generate ED25519 keypair for SSH
+function generate_ssh_keypair {
+  # Create files subdirectory
+  # The command can be removed after we add there any static files tracked by Git
+  mkdir -p ../files
+
+  Log "Checking existence of keypair \"$KEYPAIR_FILENAME\""
+
+  if [[ -f "../files/$KEYPAIR_FILENAME" ]]; then
+    Log "Keypair already exists"
+  else
+    Log "Keypair non-existent, generating"
+    ssh-keygen -t ed25519 -q -N '' -f "../files/${KEYPAIR_FILENAME}"
+
+    if [[ $? -eq 0 ]]; then
+      Log "Keypair generated successfully"
+    else
+      Log FATAL "Could not generate keypair, aborting"
+      exit $ERROR_KEYPAIR_GENERATION
+    fi
+  fi
+}
 # Section end: function definitions
 
 # Section start: script main block
@@ -85,4 +108,6 @@ generate_aws_config_from_template
 generate_aws_credentials_from_template
 # Generate providers file from template
 generate_providers_tf_from_template
+# Generate ED25519 keypair for SSH
+generate_ssh_keypair
 # Section end: script main block
