@@ -21,4 +21,8 @@ variable "vpc_main_cidr_block" {
 variable "subnet_main_cidr_block" {
   type = string
 }
+
+variable "aws_route_main_destination_cidr_block" {
+  type = string
+}
 # Section end: variables for networks.tf

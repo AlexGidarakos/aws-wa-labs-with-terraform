@@ -5,6 +5,7 @@ Application_prefix = "APPLICATION_PREFIX"
 # Section end: variables for keypairs.tf
 
 # Section start: variables for networks.tf
-vpc_main_cidr_block    = "10.0.0.0/16"
-subnet_main_cidr_block = "10.0.0.0/24"
+vpc_main_cidr_block                   = "10.0.0.0/16"
+subnet_main_cidr_block                = "10.0.0.0/24"
+aws_route_main_destination_cidr_block = "0.0.0.0/0"
 # Section end: variables for networks.tf

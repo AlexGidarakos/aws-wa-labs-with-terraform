@@ -32,3 +32,23 @@ resource "aws_internet_gateway_attachment" "main" {
   internet_gateway_id = aws_internet_gateway.main.id
   vpc_id              = aws_vpc.main.id
 }
+
+resource "aws_route_table" "main" {
+  vpc_id = aws_vpc.main.id
+
+  tags = {
+    Application = "${var.Application_prefix}/${terraform.workspace}"
+    Name        = "${terraform.workspace}"
+  }
+}
+
+resource "aws_route" "main" {
+  route_table_id            = aws_route_table.main.id
+  destination_cidr_block    = var.aws_route_main_destination_cidr_block
+  gateway_id                = aws_internet_gateway.main.id
+}
+
+resource "aws_route_table_association" "main" {
+  route_table_id = aws_route_table.main.id
+  subnet_id      = aws_subnet.main.id
+}
