@@ -44,3 +44,6 @@ plan
 aws.config
 aws.credentials
 providers.tf
+
+# SSH keypair generated from init script
+*_ED25519_Key*
