@@ -5,7 +5,28 @@ Application_prefix = "APPLICATION_PREFIX"
 # Section end: variables for keypairs.tf
 
 # Section start: variables for networks.tf
-vpc_main_cidr_block                   = "10.0.0.0/16"
-subnet_main_cidr_block                = "10.0.0.0/24"
-aws_route_main_destination_cidr_block = "0.0.0.0/0"
+vpc_main_cidr_block                       = "10.0.0.0/16"
+subnet_main_cidr_block                    = "10.0.0.0/24"
+aws_route_main_destination_cidr_block     = "0.0.0.0/0"
+network_acl_rule_in_http_rule_number      = 100
+network_acl_rule_in_http_protocol         = "tcp"
+network_acl_rule_in_http_rule_action      = "allow"
+network_acl_rule_in_http_egress           = "false"
+network_acl_rule_in_http_cidr_block       = "0.0.0.0/0"
+network_acl_rule_in_http_from_port        = 80
+network_acl_rule_in_http_to_port          = 80
+network_acl_rule_in_ssh_rule_number       = 101
+network_acl_rule_in_ssh_protocol          = "tcp"
+network_acl_rule_in_ssh_rule_action       = "allow"
+network_acl_rule_in_ssh_egress            = "false"
+network_acl_rule_in_ssh_cidr_block        = "0.0.0.0/0"
+network_acl_rule_in_ssh_from_port         = 22
+network_acl_rule_in_ssh_to_port           = 22
+network_acl_rule_in_responses_rule_number = 102
+network_acl_rule_in_responses_protocol    = "tcp"
+network_acl_rule_in_responses_rule_action = "allow"
+network_acl_rule_in_responses_egress      = "false"
+network_acl_rule_in_responses_cidr_block  = "0.0.0.0/0"
+network_acl_rule_in_responses_from_port   = 1024
+network_acl_rule_in_responses_to_port     = 65535
 # Section end: variables for networks.tf
