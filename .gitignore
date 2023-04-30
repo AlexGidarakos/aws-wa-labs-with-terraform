@@ -39,3 +39,7 @@ plan
 # Suffixes to use for ad-hoc file exclusions
 *-gitignore*
 *.gitignore.*
+
+# AWS configuration and credentials files generated from templates
+aws.config
+aws.credentials
