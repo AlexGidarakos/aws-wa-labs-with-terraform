@@ -18,3 +18,17 @@ resource "aws_subnet" "main" {
     Name        = "${terraform.workspace}"
   }
 }
+
+# Define the main Internet Gateway
+resource "aws_internet_gateway" "main" {
+  tags = {
+    Application = "${var.Application_prefix}/${terraform.workspace}"
+    Name        = "${terraform.workspace}"
+  }
+}
+
+# Define attachment of IGW to VPC
+resource "aws_internet_gateway_attachment" "main" {
+  internet_gateway_id = aws_internet_gateway.main.id
+  vpc_id              = aws_vpc.main.id
+}
