@@ -45,8 +45,8 @@ function generate_aws_credentials_from_template {
   SED_FAILED="false"
   Log "Processing \"aws.credentials.template\""
   sed \
-    -e "s/AWS_ACCESS_KEY_ID/$AWS_ACCESS_KEY_ID/g" \
-    -e "s/AWS_SECRET_ACCESS_KEY/$AWS_SECRET_ACCESS_KEY/g" \
+    -e "s/AWS_ACCESS_KEY_ID/${AWS_ACCESS_KEY_ID//\//\\/}/g" \
+    -e "s/AWS_SECRET_ACCESS_KEY/${AWS_SECRET_ACCESS_KEY//\//\\/}/g" \
     ../templates/aws.credentials.template > ../aws.credentials || SED_FAILED="true"
 
   if [[ "$SED_FAILED" == "true" ]]; then
@@ -99,6 +99,34 @@ function generate_ssh_keypair {
     fi
   fi
 }
+
+# Generate tfvars file from template
+function generate_terraform_tfvars_from_template {
+  SED_FAILED="false"
+  Log "Processing \"terraform.tfvars.template\""
+  sed \
+    -e "s/PROJECT_OWNER/$PROJECT_OWNER/g" \
+    -e "s/PROJECT_NAME/$PROJECT_NAME/g" \
+    -e "s/KEYPAIR_FILENAME/$KEYPAIR_FILENAME/g" \
+    -e "s/APPLICATION_PREFIX/$APPLICATION_PREFIX/g" \
+    ../templates/terraform.tfvars.template > ../terraform.tfvars || SED_FAILED="true"
+
+  if [[ "$SED_FAILED" == "true" ]]; then
+    Log FATAL "Could not generate \"terraform.tfvars\" from template, aborting"
+    exit $ERROR_TERRAFORM_TFVARS_GENERATION
+  else
+    Log "\"terraform.tfvars\" generated successfully from template"
+  fi
+}
+
+# Create workspaces
+function create_terraform_workspaces {
+  Log "Creating Terraform workspaces"
+
+  for i in $WORKSPACES; do
+    (cd ..; terraform workspace new $i &> /dev/null)
+  done
+}
 # Section end: function definitions
 
 # Section start: script main block
@@ -110,4 +138,8 @@ generate_aws_credentials_from_template
 generate_providers_tf_from_template
 # Generate ED25519 keypair for SSH
 generate_ssh_keypair
+# Generate tfvars file from template
+generate_terraform_tfvars_from_template
+# Create workspaces
+create_terraform_workspaces
 # Section end: script main block

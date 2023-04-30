@@ -27,7 +27,6 @@ override.tf.json
 
 # Include tfplan files to ignore the plan output of command: terraform plan -out=tfplan
 # example: *tfplan*
-plan
 *tfplan
 
 # Generic AWS Access Keys CSV
@@ -44,6 +43,10 @@ plan
 aws.config
 aws.credentials
 providers.tf
+terraform.tfvars
 
 # SSH keypair generated from init script
 *ed25519-key*
+
+# Lock file
+.terraform.lock.hcl

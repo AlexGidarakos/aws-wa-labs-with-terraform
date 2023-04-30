@@ -1,0 +1,5 @@
+# Section start: variables for keypairs.tf
+key_name_prefix    = "PROJECT_OWNER-PROJECT_NAME"
+public_key         = "KEYPAIR_FILENAME.pub"
+Application_prefix = "APPLICATION_PREFIX"
+# Section end: variables for keypairs.tf

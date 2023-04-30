@@ -6,12 +6,13 @@ PROJECT_OWNER="alexg"  # E.g. a person, team etc.
 PROJECT_NAME="aws-wa-labs-tf"
 LAB_NAME="operational-excellence\/100-inventory-and-patch-management"
 PROJECT_REGION="us-east-1"
+WORKSPACES="prod test"
 # Section end: base variables
 
 # Section start: derived variables
 # Variables derived from the base variables
-KEYPAIR_FILENAME="${PROJECT_NAME}-ed25519-key"
-APPLICATION_PREFIX="${PROJECT_OWNER}/${PROJECT_NAME}/${LAB_NAME}"
+KEYPAIR_FILENAME="${PROJECT_OWNER}-${PROJECT_NAME}-ed25519-key"
+APPLICATION_PREFIX="${PROJECT_OWNER}\/${PROJECT_NAME}\/${LAB_NAME}"
 # Section end: derived variables
 
 # Section start: exit codes
@@ -22,4 +23,5 @@ ERROR_AWS_SECRET_ACCESS_KEY_NOT_SET=3
 ERROR_AWS_CREDENTIALS_GENERATION=4
 ERROR_PROVIDERS_TF_GENERATION=5
 ERROR_KEYPAIR_GENERATION=6
+ERROR_TERRAFORM_TFVARS_GENERATION=7
 # Section end: exit codes
