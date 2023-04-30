@@ -4,9 +4,14 @@ TF_VERSION="1.4.6"
 TF_AWS_VERSION="4.65.0"
 PROJECT_OWNER="alexg"  # E.g. a person, team etc.
 PROJECT_NAME="aws-wa-labs-tf"
-LAB_NAME="operational-excellence/100-inventory-and-patch-management"
+LAB_NAME="operational-excellence\/100-inventory-and-patch-management"
 PROJECT_REGION="us-east-1"
 # Section end: base variables
+
+# Section start: derived variables
+# Variables derived from the base variables
+APPLICATION_PREFIX="${PROJECT_OWNER}/${PROJECT_NAME}/${LAB_NAME}"
+# Section end: derived variables
 
 # Section start: exit codes
 EXIT_OK=0

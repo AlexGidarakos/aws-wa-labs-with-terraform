@@ -64,6 +64,9 @@ function generate_providers_tf_from_template {
   sed \
     -e "s/TF_VERSION/$TF_VERSION/g" \
     -e "s/TF_AWS_VERSION/$TF_AWS_VERSION/g" \
+    -e "s/PROJECT_OWNER/$PROJECT_OWNER/g" \
+    -e "s/PROJECT_NAME/$PROJECT_NAME/g" \
+    -e "s/LAB_NAME/$LAB_NAME/g" \
     ../templates/providers.tf.template > ../providers.tf || SED_FAILED="true"
 
   if [[ "$SED_FAILED" == "true" ]]; then
