@@ -314,3 +314,25 @@ variable "instance_app_instance_type" {
   type = string
 }
 # Section end: variables for ec2.tf
+
+# Section start: variables for ssm.tf
+variable "ssm_association_main_name" {
+  type = string
+}
+
+variable "ssm_association_main_association_name" {
+  type = string
+}
+
+variable "ssm_association_main_schedule_expression" {
+  type = string
+}
+
+variable "ssm_association_main_targets_key" {
+  type = string
+}
+
+variable "ssm_association_main_targets_values" {
+  type = list(string)
+}
+# Section end: variables for ssm.tf

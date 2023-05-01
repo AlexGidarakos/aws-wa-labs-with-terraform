@@ -86,3 +86,11 @@ instance_tags_PatchGroup                         = "Critical"
 instance_app_count                               = 2
 instance_app_instance_type                       = "t2.micro"
 # Section end: variables for ec2.tf
+
+# Section start: variables for ssm.tf
+ssm_association_main_name                = "AWS-GatherSoftwareInventory"
+ssm_association_main_association_name    = "InventoryAllInstances"
+ssm_association_main_schedule_expression = "rate(30 minutes)"
+ssm_association_main_targets_key         = "tag:Environment"
+ssm_association_main_targets_values      = ["OELabIPM"]
+# Section end: variables for ssm.tf
