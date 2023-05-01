@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -xe
+HTML="<img src=\"https://s3.amazonaws.com/cloudformation-examples-us-east-1/cloudformation_graphic.png\" alt=\"AWS CloudFormation Logo\" />\n"
+HTML="${HTML}<h1>Congratulations, you have successfully launched the AWS CloudFormation sample.</h1>\n"
+echo -e $HTML > /tmp/index.html
+sudo chown root:root /tmp/index.html
+sudo chmod 644 /tmp/index.html
+sudo mkdir -p /var/www/html/
+sudo mv /tmp/index.html /var/www/html/
+sudo yum update -y
+sudo yum install -y httpd
+sudo systemctl enable httpd
+sudo systemctl start httpd

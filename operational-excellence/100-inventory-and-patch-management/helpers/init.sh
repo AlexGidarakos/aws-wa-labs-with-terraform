@@ -96,10 +96,6 @@ function generate_providers_tf_from_template {
 
 # Generate ED25519 keypair for SSH
 function generate_ssh_keypair {
-  # Create files subdirectory
-  # The command can be removed after we add there any static files tracked by Git
-  mkdir -p ../files
-
   Log "Checking existence of keypair \"$KEYPAIR_FILENAME\""
 
   if [[ -f "../files/$KEYPAIR_FILENAME" ]]; then

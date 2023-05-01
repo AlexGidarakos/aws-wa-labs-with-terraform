@@ -96,14 +96,21 @@ resource "aws_security_group" "main" {
     protocol    = var.security_group_main_ingress1_protocol
     from_port   = var.security_group_main_ingress1_from_port
     to_port     = var.security_group_main_ingress1_to_port
-    cidr_blocks = [var.my_ipv4]
+    cidr_blocks = var.security_group_main_ingress1_cidr_blocks
   }
 
   ingress {
     protocol    = var.security_group_main_ingress2_protocol
     from_port   = var.security_group_main_ingress2_from_port
     to_port     = var.security_group_main_ingress2_to_port
-    cidr_blocks = [var.my_ipv4]
+    cidr_blocks = var.security_group_main_ingress2_cidr_blocks
+  }
+
+  egress {
+    protocol    = var.security_group_main_egress_protocol
+    from_port   = var.security_group_main_egress_from_port
+    to_port     = var.security_group_main_egress_to_port
+    cidr_blocks = var.security_group_main_egress_cidr_blocks
   }
 
   tags = {
