@@ -224,3 +224,13 @@ variable "security_group_main_ingress2_to_port" {
   type = number
 }
 # Section end: variables for security.tf
+
+# Section start: variables for ec2.tf
+variable "ami_main_owners" {
+  type = list(string)
+}
+
+variable "ami_main_filter_values" {
+  type = list(string)
+}
+# Section end: variables for ec2.tf

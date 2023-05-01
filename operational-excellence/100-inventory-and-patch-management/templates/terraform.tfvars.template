@@ -61,3 +61,8 @@ security_group_main_ingress2_protocol      = "tcp"
 security_group_main_ingress2_from_port     = 80
 security_group_main_ingress2_to_port       = 80
 # Section end: variables for security.tf
+
+# Section start: variables for ec2.tf
+ami_main_owners        = ["amazon"]
+ami_main_filter_values = ["amzn2-ami-hvm-*-x86_64-ebs"]
+# Section end: variables for ec2.tf
