@@ -65,6 +65,9 @@ security_group_main_egress_protocol        = "-1"
 security_group_main_egress_from_port       = 0
 security_group_main_egress_to_port         = 0
 security_group_main_egress_cidr_blocks     = ["0.0.0.0/0"]
+iam_role_main_name                         = "ManagedInstancesRole"
+iam_role_main_managed_policy_arns          = ["arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforSSM"]
+iam_instance_profile_main_name             = "ManagedInstancesProfile"
 # Section end: variables for security.tf
 
 # Section start: variables for ec2.tf

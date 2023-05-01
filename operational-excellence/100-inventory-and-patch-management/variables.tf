@@ -243,6 +243,18 @@ variable "security_group_main_egress_to_port" {
 variable "security_group_main_egress_cidr_blocks" {
   type = list(string)
 }
+
+variable "iam_role_main_name" {
+  type = string
+}
+
+variable "iam_role_main_managed_policy_arns" {
+  type = list(string)
+}
+
+variable "iam_instance_profile_main_name" {
+  type = string
+}
 # Section end: variables for security.tf
 
 # Section start: variables for ec2.tf

@@ -118,3 +118,26 @@ resource "aws_security_group" "main" {
     Name        = "${terraform.workspace}"
   }
 }
+
+# Define IAM role for EC2 SSM
+resource "aws_iam_role" "main" {
+  name                = var.iam_role_main_name
+  assume_role_policy  = file("./files/aws_iam_role.main.assume_role_policy")
+  managed_policy_arns = var.iam_role_main_managed_policy_arns
+
+  tags = {
+    Application = "${var.Application_prefix}/${terraform.workspace}"
+    Name        = "${terraform.workspace}"
+  }
+}
+
+# Define instance profile with IAM role for EC2 SSM
+resource "aws_iam_instance_profile" "main" {
+  name = var.iam_instance_profile_main_name
+  role = aws_iam_role.main.name
+
+  tags = {
+    Application = "${var.Application_prefix}/${terraform.workspace}"
+    Name        = "${terraform.workspace}"
+  }
+}

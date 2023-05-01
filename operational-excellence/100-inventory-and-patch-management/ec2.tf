@@ -19,6 +19,7 @@ resource "aws_instance" "web" {
   vpc_security_group_ids      = [aws_security_group.main.id]
   subnet_id                   = aws_subnet.main.id
   user_data                   = file("./files/aws_instance.web.user_data")
+  iam_instance_profile        = aws_iam_instance_profile.main.name
 
   tags = {
     Application     = "${var.Application_prefix}/${terraform.workspace}"
@@ -45,6 +46,7 @@ resource "aws_instance" "app" {
   associate_public_ip_address = var.instance_associate_public_ip_address
   vpc_security_group_ids      = [aws_security_group.main.id]
   subnet_id                   = aws_subnet.main.id
+  iam_instance_profile        = aws_iam_instance_profile.main.name
 
   tags = {
     Application     = "${var.Application_prefix}/${terraform.workspace}"
