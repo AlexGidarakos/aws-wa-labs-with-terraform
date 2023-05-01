@@ -53,4 +53,11 @@ network_acl_rule_out_responses_egress      = true
 network_acl_rule_out_responses_cidr_block  = "0.0.0.0/0"
 network_acl_rule_out_responses_from_port   = 1024
 network_acl_rule_out_responses_to_port     = 65535
+security_group_main_ingress1_protocol      = "tcp"
+security_group_main_ingress1_from_port     = 22
+security_group_main_ingress1_to_port       = 22
+my_ipv4                                    = "MY_IPV4/32"
+security_group_main_ingress2_protocol      = "tcp"
+security_group_main_ingress2_from_port     = 80
+security_group_main_ingress2_to_port       = 80
 # Section end: variables for security.tf

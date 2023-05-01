@@ -85,3 +85,29 @@ resource "aws_network_acl_association" "main" {
   network_acl_id = aws_network_acl.main.id
   subnet_id      = aws_subnet.main.id
 }
+
+# Define the main security group for EC2 instances
+resource "aws_security_group" "main" {
+  name        = "${var.resource_prefix}-${terraform.workspace}-sg-main"
+  vpc_id      = aws_vpc.main.id
+  description = "Enable SSH access via port 22 and web access via port 80"
+
+  ingress {
+    protocol    = var.security_group_main_ingress1_protocol
+    from_port   = var.security_group_main_ingress1_from_port
+    to_port     = var.security_group_main_ingress1_to_port
+    cidr_blocks = [var.my_ipv4]
+  }
+
+  ingress {
+    protocol    = var.security_group_main_ingress2_protocol
+    from_port   = var.security_group_main_ingress2_from_port
+    to_port     = var.security_group_main_ingress2_to_port
+    cidr_blocks = [var.my_ipv4]
+  }
+
+  tags = {
+    Application = "${var.Application_prefix}/${terraform.workspace}"
+    Name        = "${terraform.workspace}"
+  }
+}

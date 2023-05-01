@@ -14,6 +14,23 @@ function Log () {
   echo $(date +%Y-%m-%dT%H:%M:%S.%3N%:z) $EVENT
 }
 
+# Check if required binaries are present/in the PATH variable
+function check_requirements {
+  Log "Checking existence of required binaries: $REQUIREMENTS"
+  NOTFOUND="false"
+
+  for i in $REQUIREMENTS; do
+    which $i > /dev/null && Log "$i found" || { Log ERROR "$i not found in PATH"; NOTFOUND="true"; }
+  done
+
+  if [[ "$NOTFOUND" == "true" ]]; then
+    Log FATAL "Requirements unmet, aborting"
+    exit $ERROR_UNMET_REQUIREMENTS
+  else
+    Log "All requirements met"
+  fi
+}
+
 # Generate AWS configuration file from template
 function generate_aws_config_from_template {
   SED_FAILED="false"
@@ -102,6 +119,16 @@ function generate_ssh_keypair {
 
 # Generate tfvars file from template
 function generate_terraform_tfvars_from_template {
+  Log "Looking up this host's IPv4 address"
+  MY_IPV4=$(curl https://checkip.amazonaws.com/ 2> /dev/null)
+
+  if [[ $? -eq 0 ]]; then
+    Log "IPv4 address \"$MY_IPV4\" acquired successfully"
+  else
+    Log FATAL "Could not acquire IPv4 address, aborting"
+    exit $ERROR_IPV4_LOOKUP
+  fi
+
   SED_FAILED="false"
   Log "Processing \"terraform.tfvars.template\""
   sed \
@@ -109,6 +136,7 @@ function generate_terraform_tfvars_from_template {
     -e "s/PROJECT_NAME/$PROJECT_NAME/g" \
     -e "s/KEYPAIR_FILENAME/$KEYPAIR_FILENAME/g" \
     -e "s/APPLICATION_PREFIX/$APPLICATION_PREFIX/g" \
+    -e "s/MY_IPV4/$MY_IPV4/g" \
     ../templates/terraform.tfvars.template > ../terraform.tfvars || SED_FAILED="true"
 
   if [[ "$SED_FAILED" == "true" ]]; then
@@ -130,6 +158,8 @@ function create_terraform_workspaces {
 # Section end: function definitions
 
 # Section start: script main block
+# Check if required binaries are present/in the PATH variable
+check_requirements
 # Generate AWS configuration file from template
 generate_aws_config_from_template
 # Generate AWS credentials file from template

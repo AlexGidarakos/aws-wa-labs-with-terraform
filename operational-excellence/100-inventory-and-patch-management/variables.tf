@@ -195,4 +195,32 @@ variable "network_acl_rule_out_responses_from_port" {
 variable "network_acl_rule_out_responses_to_port" {
   type = number
 }
+
+variable "security_group_main_ingress1_protocol" {
+  type = string
+}
+
+variable "security_group_main_ingress1_from_port" {
+  type = number
+}
+
+variable "security_group_main_ingress1_to_port" {
+  type = number
+}
+
+variable "my_ipv4" {
+  type = string
+}
+
+variable "security_group_main_ingress2_protocol" {
+  type = string
+}
+
+variable "security_group_main_ingress2_from_port" {
+  type = number
+}
+
+variable "security_group_main_ingress2_to_port" {
+  type = number
+}
 # Section end: variables for security.tf
